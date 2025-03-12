@@ -130,3 +130,29 @@
   .btn-danger:hover {
     background-color: #b30000;
   }
+
+  .corner-image {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 80px; /* Ajusta el tamaño según sea necesario */
+    height: auto;
+  }
+  
+  .recuperar-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .recuperar-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+  }
+  

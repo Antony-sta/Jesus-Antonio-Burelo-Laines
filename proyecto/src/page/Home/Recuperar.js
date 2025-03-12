@@ -1,50 +1,46 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Card, Form, Button, Alert } from 'react-bootstrap';
-import "./Home.css"; // Puedes reutilizar estilos
+import "./Recuperar.css";
 
 export function Recuperar() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleRecuperar = (e) => {
     e.preventDefault();
-
-    // Simulación de recuperación de contraseña
-    setMessage(`Si el correo "${email}" está registrado, recibirás un enlace para restablecer tu contraseña.`);
-    setEmail('');
+    if (email) {
+      setMessage("Si el correo está registrado, recibirás un enlace para restablecer tu contraseña.");
+    } else {
+      setMessage("Por favor, ingresa un correo válido.");
+    }
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center min-vh-100">
-      <Card className="shadow-lg p-4 login-card text-center">
-        <Card.Body>
-          <Card.Title className="mb-3">🔑 Recuperar Contraseña</Card.Title>
-          <Card.Text className="text-muted">Ingresa tu correo para restablecer la contraseña</Card.Text>
-          {message && <Alert variant="info">{message}</Alert>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Control
-                type="email"
-                placeholder="Correo electrónico"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </Form.Group>
-            <Button variant="primary" type="submit" className="w-100">
-              Enviar Instrucciones
-            </Button>
-          </Form>
-          <div className="mt-3">
-            <Button variant="link" onClick={() => navigate("/")}>
-              🔙 Volver al inicio de sesión
-            </Button>
+    <div className="recuperar-page">
+      <div className="recuperar-container">
+        <h2>Recuperar Contraseña</h2>
+        {message && <div className="alert alert-info">{message}</div>}
+        <form onSubmit={handleRecuperar}>
+          <div className="form-group">
+            <input
+              type="email"
+              className="form-control"
+              placeholder="Ingresa tu correo"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
-        </Card.Body>
-      </Card>
-    </Container>
+          <button type="submit" className="btn btn-primary">
+            Enviar Instrucciones
+          </button>
+        </form>
+        <button className="btn btn-secondary" onClick={() => navigate("/")}>
+          Volver
+        </button>
+      </div>
+    </div>
   );
 }
 
