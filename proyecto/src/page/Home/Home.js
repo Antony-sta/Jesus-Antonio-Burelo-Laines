@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "./Home.css"; 
+import "./Home.css";
 import { Link } from 'react-router-dom';
 
 export function Home() {
@@ -11,7 +11,7 @@ export function Home() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    
+
     // Validación de credenciales
     if (username === 'admin' && password === '1234') {
       setError('');
@@ -59,7 +59,7 @@ export function Home() {
           </button>
         </form>
         <div className="forgot-password">
-  <Link to="/Recuperar">¿Olvidaste tu contraseña?</Link>
+          <Link to="/recuperar">¿Olvidaste tu contraseña?</Link>
         </div>
       </div>
     </div>
