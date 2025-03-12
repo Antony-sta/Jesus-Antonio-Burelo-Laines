@@ -1,9 +1,8 @@
 import React from 'react'
 
-export function Fouter() {
+export  function Fouter() {
   return (
-    <div>Hola mundo</div>
+    <div>Fouter</div>
   )
 }
-
-export default Fouter
+export default Fouter;

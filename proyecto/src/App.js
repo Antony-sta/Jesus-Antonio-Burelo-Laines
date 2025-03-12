@@ -3,7 +3,7 @@ import { Rutas } from './routes';
 
 function App() {
   return (
-    <div>
+    <div >
     <BrowserRouter>
     <Rutas/>
     </BrowserRouter>

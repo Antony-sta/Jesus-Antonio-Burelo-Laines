@@ -9,7 +9,7 @@ export function Menu() {
             <div className="subHeader">
                 <Link to="/inicio" className="link">Inicio</Link>
                 <Link to="/calificaciones" className="link">Calificaciones</Link>
-                <Link to="/comentarios" className="link">Comentarios</Link>
+                <Link to="/comen" className="link">Comentarios</Link>
             </div>
         </div>
     )

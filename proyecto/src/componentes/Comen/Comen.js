@@ -5,5 +5,4 @@ export function Comen() {
     <div>Comen</div>
   )
 }
-
-export default Comen
+export default Comen;

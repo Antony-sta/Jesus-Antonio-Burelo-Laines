@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "./Recuperar.css";
+import "../Recuperar.js";
 
 export function Recuperar() {
   const [email, setEmail] = useState('');

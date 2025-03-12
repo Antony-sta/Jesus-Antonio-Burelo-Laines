@@ -1,5 +1,12 @@
 .container {
   padding: 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: white; /* Añadido para que la tabla tenga fondo blanco y sea visible sobre la imagen */
+  /* Opcional: para añadir un efecto de oscurecimiento */
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  /* background-blend-mode: overlay; */
 }
 
 .table {

@@ -1,38 +1,70 @@
-import React from 'react';
-import './Inicio.css'; // Importa el archivo CSS
+import React, { useState } from 'react';
+import { Table, Button } from 'react-bootstrap'; // Importa React Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css'; // Importa los estilos de Bootstrap
+import './Inicio.css';
 
-const TableRow = ({ data }) => (
+const TableRow = ({ data, rowIndex, onCellChange }) => (
   <tr>
-    {data.map((cell, index) => (
-      <td key={index} className="td">{cell}</td>
+    {data.map((cell, cellIndex) => (
+      <td key={cellIndex} className="td">
+        <input
+          type="text"
+          value={cell}
+          onChange={(e) => onCellChange(rowIndex, cellIndex, e.target.value)}
+        />
+      </td>
     ))}
   </tr>
 );
 
 export function Inicio() {
-  const rows = [
-    ['Tutor', 'Sexo', 'Barrio', ''],
-    ['Correo', 'No Teléfono', '', 'No de Casa'],
-    ['Edad', 'Año de nacimiento', '', ''],
+  const initialRows = [
+    ['Tutor:', 'Sexo', 'Barrio', 'Los pozos'],
+    ['Correo:', 'No Teléfono', 'Colonia', 'No de Casa'],
+    ['Edad:', 'Año de nacimiento', 'Mes el que sea', 'Dia 12'],
   ];
+
+  const [rows, setRows] = useState(initialRows);
+
+  const handleCellChange = (rowIndex, cellIndex, newValue) => {
+    const updatedRows = rows.map((row, index) => {
+      if (index === rowIndex) {
+        return row.map((cell, idx) => (idx === cellIndex ? newValue : cell));
+      }
+      return row;
+    });
+    setRows(updatedRows);
+  };
+
+  const handleSave = () => {
+    // Aquí puedes implementar la lógica para guardar los datos actualizados
+    console.log('Datos guardados:', rows);
+    alert("Datos Guardados en la consola")
+  };
 
   return (
     <div className="container">
-      <table className="table">
+      <Table striped bordered hover> {/* Usa el componente Table de React Bootstrap */}
         <thead>
           <tr>
-            <th className="th">Nombre</th>
-            <th className="th">No Control</th>
-            <th className="th">Dirección</th>
-            <th className="th">Calle</th>
+            <th>Nombre</th> {/* Usa <th> en lugar de <th className="th"> */}
+            <th>No Control</th>
+            <th>Dirección</th>
+            <th>Calle</th>
           </tr>
         </thead>
         <tbody>
           {rows.map((row, index) => (
-            <TableRow key={index} data={row} />
+            <TableRow
+              key={index}
+              rowIndex={index}
+              data={row}
+              onCellChange={handleCellChange}
+            />
           ))}
         </tbody>
-      </table>
+      </Table>
+      <Button variant="primary" onClick={handleSave}>Guardar</Button> {/* Usa el componente Button de React Bootstrap */}
     </div>
   );
 }

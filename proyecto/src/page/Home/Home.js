@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./Home.css"; 
+import { Link } from 'react-router-dom';
 
 export function Home() {
   const [username, setUsername] = useState('');
@@ -30,6 +31,7 @@ export function Home() {
           <img src="/EDUCACION.png" alt="Logo SIE Educativo" />
         </div>
         <h2>Acceso al SIE</h2>
+        <h2>(Califi Tech)</h2>
         {error && <div className="alert alert-danger">{error}</div>}
         <form onSubmit={handleLogin}>
           <div className="form-group">
@@ -57,7 +59,7 @@ export function Home() {
           </button>
         </form>
         <div className="forgot-password">
-          <a href="/recuperar">¿Olvidaste tu contraseña?</a>
+  <Link to="/Recuperar">¿Olvidaste tu contraseña?</Link>
         </div>
       </div>
     </div>
