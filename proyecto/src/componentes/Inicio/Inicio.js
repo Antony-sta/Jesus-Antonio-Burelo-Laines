@@ -43,6 +43,7 @@ export function Inicio() {
   };
 
   return (
+    
     <div className="container">
       <Table striped bordered hover> {/* Usa el componente Table de React Bootstrap */}
         <thead>

@@ -131,13 +131,7 @@
     background-color: #b30000;
   }
 
-  .corner-image {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 80px; /* Ajusta el tamaño según sea necesario */
-    height: auto;
-  }
+ 
   
   .recuperar-page {
     display: flex;
