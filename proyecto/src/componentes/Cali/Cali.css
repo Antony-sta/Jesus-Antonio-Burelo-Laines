@@ -7,11 +7,6 @@
   color: #333;
 }
 
-.subtitle {
-  color: #555;
-  margin-top: 20px;
-}
-
 .list {
   list-style-type: none;
   padding: 0;
@@ -30,25 +25,7 @@
   background-color: #e0e0e0;
 }
 
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.modal {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  width: 300px;
-  text-align: center;
-}
 
 .closeButton {
   margin-top: 10px;
