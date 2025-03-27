@@ -54,6 +54,7 @@ export function Home() {
               required
             />
           </div>
+          
           <button type="submit" className="btn btn-primary">
             Iniciar Sesión
           </button>

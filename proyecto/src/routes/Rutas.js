@@ -20,8 +20,7 @@ export function Rutas() {
 
   return (
     <Routes>
-      <Route path='/' element={Layouts(Layout, Home)} />
-      <Route path='/menu' element={Layouts(Layout, Menu)} />
+      <Route path='/' element={Layouts( Home)} />
       <Route path='/inicio' element={Layouts(Layout, Inicio)} />
       <Route path="/calificaciones" element={Layouts(Layout, Cali)} />
       <Route path="/recuperar" element={Layouts(Layout, Recuperar)} />
