@@ -40,7 +40,7 @@ export function Menu() {
           <Dropdown.Item as={Link} to="/calificaciones" eventKey="1">
             Calificaciones
           </Dropdown.Item>
-          <Dropdown.Item as={Link} to="/comentarios" eventKey="2">
+          <Dropdown.Item as={Link} to="/Comen" eventKey="2">
             Comentarios
           </Dropdown.Item>
         </DropdownButton>
