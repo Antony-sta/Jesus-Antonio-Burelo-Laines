@@ -16,6 +16,6 @@ app.use(express.static(path.join(__dirname, 'uploads')))
 
 app.use(cors())
 
-app.use('/api', productoRoute)
+app.use('/', productoRoute)
 
 module.exports = app

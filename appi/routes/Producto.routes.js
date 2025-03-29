@@ -1,14 +1,22 @@
-const express=require("express");
-const multiparty=require("connect-multiparty");
+const express = require("express");
+const multiparty = require("connect-multiparty");
 
-const productosController=require("../controlles/productos.controller");
+const productosController = require("../controlles/productos.controller");
+const usuarios = require("../controlles/usuarios.controller");
+const usuariosController = require("../controlles/usuarios.controller");
 
-const md_mparty=multiparty({uploadDir:"./uploads"});
-const api=express.Router();
+const md_mparty = multiparty({ uploadDir: "./uploads" });
+const api = express.Router();
 
-api.post("/crear",[md_mparty], productosController.createProducto);
+// Rutas para productos
+api.post("/crear", [md_mparty], productosController.createProducto);
+api.post("/user", [md_mparty], usuarios.createUser);
+
 api.get("/lista", productosController.getProducto);
-api.patch("/verlos/:id",[md_mparty],productosController.updateProducto);
-api.delete('/eliminar/:id', productosController.delProducto);
+api.patch("/verlos/:id", [md_mparty], productosController.updateProducto);
+api.delete("/eliminar/:id", productosController.delProducto);
 
-module.exports=api;
+// Ruta para login
+api.post("/login", usuariosController.loginUser);
+
+module.exports = api;

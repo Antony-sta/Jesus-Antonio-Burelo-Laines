@@ -16,4 +16,4 @@ const Productos=mongoose.Schema({
     createdAT:{type:Date,default:Date.now()}
 })
 
-module.exports=mongoose.model("Producto",Productos);
+module.exports=mongoose.model("Datos",Productos);

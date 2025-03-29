@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import "./Home.css";
 import { Link } from 'react-router-dom';
 
@@ -9,15 +10,30 @@ export function Home() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Validación de credenciales
-    if (username === 'admin' && password === '1234') {
+    try {
+      // Realizar la solicitud al backend usando axios
+      const response = await axios.post("http://localhost:5000/login", {
+        user: username,
+        password,
+      });
+
+      // Inicio de sesión exitoso
       setError('');
+      alert(`Bienvenido, ${response.data.user.user}`);
       navigate("/inicio"); // Redirige a la página de inicio tras iniciar sesión
-    } else {
-      setError('Credenciales incorrectas');
+    } catch (error) {
+      // Manejo de errores
+      if (error.response) {
+        // Error del servidor (código de estado fuera del rango 2xx)
+        setError(error.response.data.msg || "Error al iniciar sesión");
+      } else {
+        // Error de red u otro problema
+        console.error("Error al conectar con el servidor:", error);
+        setError("Error al conectar con el servidor");
+      }
     }
   };
 
@@ -64,8 +80,6 @@ export function Home() {
         </div>
       </div>
     </div>
-
-    
   );
 }
 

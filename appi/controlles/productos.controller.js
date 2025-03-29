@@ -1,29 +1,48 @@
 const Producto = require('../models/producto.models');
+const Usuarios = require('../models/usuarios.models'); // Importar el modelo de usuarios
 const imagen = require("../utils/img");
 const fs = require('fs');
 const path = require('path');
 
+function generar(length) {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+}
+
 async function createProducto(req, res) {
     try {
-        const productos = new Producto(req.body);
+        const producto = new Producto(req.body);
 
-        // Manejo de la imagen
-        if (req.files?.imagep) {
-            const filePath = imagen.getFilePath(req.files.imagep); // Obtiene la ruta completa
-            const fileName = path.basename(filePath); // Extrae solo el nombre del archivo
-            productos.imagep = fileName; // Guarda solo el nombre del archivo
-        }
+        // Guardar el producto en la base de datos
+        const savedProducto = await producto.save();
 
-        const datos = await productos.save();
+        // Generar usuario y contraseña automáticamente
+        const user = `user_${generar(5)}`;
+        const password = req.body.password || generar(5); // Contraseña generada
+
+        // Crear el usuario con el mismo ID que el producto
+        const usuario = await Usuarios.create({
+            _id: savedProducto._id, // Usar el mismo ID que el producto
+            user,
+            password, // Guardar la contraseña en texto plano
+        });
+
         res.status(201).send({
-            msg: "Producto creado correctamente",
-            datos,
-            imageId: productos.imagep, // Devuelve el nombre del archivo
-            imageUrl: `http://localhost:4000/${productos.imagep}`, // Construye la URL completa
+            msg: "Producto y usuario creados correctamente",
+            producto: savedProducto,
+            usuario: {
+                id: usuario._id,
+                user: usuario.user,
+                password, // Enviamos la contraseña generada para que el cliente la reciba
+            },
         });
     } catch (error) {
-        console.error("Error al crear el producto:", error);
-        res.status(500).send({ msg: "Error al guardar los datos", error: error.message });
+        console.error("Error al crear el producto y el usuario:", error);
+        res.status(500).send({ msg: "Error interno del servidor", error: error.message });
     }
 }
 
@@ -105,5 +124,5 @@ module.exports = {
     createProducto,
     getProducto,
     delProducto,
-    updateProducto
+    updateProducto,
 };
