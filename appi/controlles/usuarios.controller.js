@@ -2,14 +2,14 @@ const Usuarios = require("../models/usuarios.models");
 const Producto = require("../models/producto.models"); // Importar el modelo de productos
 
 // Función para generar cadenas aleatorias de longitud específica
-function generateRandomString(length) {
+/* function generateRandomString(length) {
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let result = "";
     for (let i = 0; i < length; i++) {
         result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
     return result;
-}
+} */
 
 async function createUser(req, res) {
     try {

@@ -23,7 +23,7 @@ export function Rutas() {
       <Route path='/' element={Layouts( Home)} />
       <Route path='/inicio' element={Layouts(Layout, Inicio)} />
       <Route path="/calificaciones" element={Layouts(Layout, Cali)} />
-      <Route path="/recuperar" element={Layouts(Layout, Recuperar)} />
+      <Route path="/recuperar" element={Layouts( Recuperar)} />
       <Route path="/Comen" element={Layouts(Layout, Comen)} />
       <Route path="/ormu" element={Layouts(Layout, Formulario)} />
 
