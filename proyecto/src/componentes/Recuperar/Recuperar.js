@@ -43,7 +43,7 @@ export function Recuperar() {
           </button>
         </form>
 
-        <a href="/login" style={{ display: 'block', marginTop: '15px', textAlign: 'center', color: '#007bff', textDecoration: 'none' }}>
+        <a href="/" style={{ display: 'block', marginTop: '15px', textAlign: 'center', color: '#007bff', textDecoration: 'none' }}>
           Volver al Inicio de Sesión
         </a>
       </div>
