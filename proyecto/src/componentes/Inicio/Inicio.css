@@ -1,41 +1,117 @@
 .container {
+  position: relative; /* Asegura que el contenido se posicione correctamente */
+  z-index: 1; /* Coloca el contenido por encima del fondo */
   padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8); /* Opcional: fondo semitransparente para destacar el contenido */
+  border-radius: 10px; /* Opcional: bordes redondeados */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: white; /* Añadido para que la tabla tenga fondo blanco y sea visible sobre la imagen */
+  /* background-color: white;  Eliminado para que la tabla tenga fondo blanco y sea visible sobre la imagen */
   /* Opcional: para añadir un efecto de oscurecimiento */
   /* background-color: rgba(255, 255, 255, 0.8); */
   /* background-blend-mode: overlay; */
 }
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
+/* Estilo para la tarjeta */
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: white;
 }
 
-.th, .td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
+/* Encabezado de la tarjeta */
+.card-header {
+  font-size: 1.5rem;
   font-weight: bold;
+  text-transform: uppercase;
 }
 
-.th {
-  background-color: #f2f2f2;
-}
-
-.formulario-sie {
-  background-color: #e0f2f7; /* Azul claro */
-  background-image: url('data:image/svg+xml,%3Csvg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23cce0e8" fill-opacity="0.4" fill-rule="evenodd"%3E%3Cpath d="M5 0h1L0 6V5zM6 5v1H1z"/%3E%3C/g%3E%3C/svg%3E'); /* Textura sutil */
-  padding: 20px;
-  border-radius: 8px;
+/* Tabla personalizada */
+.custom-table {
+  background-color: white; /* Fondo blanco para la tabla */
+  border-radius: 5px;
+  overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.custom-table thead {
+  background-color: #007bff;
+  color: white;
+  text-transform: uppercase;
+}
+
+.custom-table th,
+.custom-table td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  color: black; /* Texto negro dentro de la tabla */
+}
+
+.custom-table tr:hover {
+  background-color: #e9ecef;
+}
+
+/* Inputs dentro de la tabla */
+.table-input {
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 5px;
+  text-align: center;
+}
+
+/* Botón guardar */
+button {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+/* Fondo general con degradado azul */
 .formulario-sie {
-  background-color: lightblue; /* Un azul claro simple */
+  background: linear-gradient(135deg, #007bff, #0056b3); /* Degradado azul */
+  color: white; /* Texto blanco para contraste */
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para estilo */
+
+}
+
+.inicio-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* Envía la imagen al fondo */
+  opacity: 0.3; /* Ajusta la opacidad para que no opaque el contenido */
+}
+
+.inicio {
+  position: relative; /* Asegura que el contenido se posicione correctamente */
+  top: 0;
+  left: 0;
+  width: 100%; /* Ocupa el 100% del ancho */
+  height: 100%; /* Ocupa el 100% del alto */
+  background-image: url('https://img.pikbest.com/best/video_preview_img/2403/10420975-6603837fad98f.jpg!w700wp'); /* Cambia esta URL por una imagen de alta resolución */
+  background-size: cover; /* Asegura que la imagen cubra todo el contenedor */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  z-index: -1; /* Envía la imagen al fondo */
+}
+
+.fouter-container {
+  background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.es%2Ffotos-vectores-gratis%2Ffondos-para-paginas-web&psig=AOvVaw0Tij0N0bocDPUM9nNVOhWX&ust=1743463766013000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKCuouj6sowDFQAAAAAdAAAAABAE'); /* Cambia esta ruta por la de tu imagen */
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Ajusta el tamaño según tus necesidades */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white; /* Cambia el color del texto si es necesario */
+  font-size: 24px;
 }

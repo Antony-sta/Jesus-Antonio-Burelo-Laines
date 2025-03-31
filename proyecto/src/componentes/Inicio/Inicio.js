@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Button } from 'react-bootstrap'; // Importa React Bootstrap
+import { Table, Button, Card, Container } from 'react-bootstrap'; // Importa React Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'; // Importa los estilos de Bootstrap
 import './Inicio.css';
 
@@ -9,6 +9,7 @@ const TableRow = ({ data, rowIndex, onCellChange }) => (
       <td key={cellIndex} className="td">
         <input
           type="text"
+          className="form-control table-input" // Clase personalizada para inputs
           value={cell}
           onChange={(e) => onCellChange(rowIndex, cellIndex, e.target.value)}
         />
@@ -19,9 +20,10 @@ const TableRow = ({ data, rowIndex, onCellChange }) => (
 
 export function Inicio() {
   const initialRows = [
-    ['Tutor:', 'Sexo', 'Barrio', 'Los pozos'],
-    ['Correo:', 'No Teléfono', 'Colonia', 'No de Casa'],
-    ['Edad:', 'Año de nacimiento', 'Mes el que sea', 'Dia 12'],
+    ['Nombre:', 'No. Control', 'Calle', 'Correo'],
+    ['Sexo:', 'Barrio', 'Teléfono', ''],
+    ['Edad:', 'Año', 'Mes', 'Día'],
+    ['Imagen:', 'Seleccionar archivo', 'Sin archivos seleccionados'],
   ];
 
   const [rows, setRows] = useState(initialRows);
@@ -37,35 +39,48 @@ export function Inicio() {
   };
 
   const handleSave = () => {
-    // Aquí puedes implementar la lógica para guardar los datos actualizados
     console.log('Datos guardados:', rows);
-    alert("Datos Guardados en la consola")
+    alert('Datos Guardados en la consola');
   };
 
   return (
-    
-    <div className="container">
-      <Table striped bordered hover> {/* Usa el componente Table de React Bootstrap */}
-        <thead>
-          <tr>
-            <th>Nombre</th> {/* Usa <th> en lugar de <th className="th"> */}
-            <th>No Control</th>
-            <th>Dirección</th>
-            <th>Calle</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, index) => (
-            <TableRow
-              key={index}
-              rowIndex={index}
-              data={row}
-              onCellChange={handleCellChange}
-            />
-          ))}
-        </tbody>
-      </Table>
-      <Button variant="primary" onClick={handleSave}>Guardar</Button> {/* Usa el componente Button de React Bootstrap */}
+    <div className="inicio-container">
+      {/* Si deseas agregar una imagen de fondo */}
+      <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.es%2Ffotos-vectores-gratis%2Ffondos-para-paginas-web&psig=AOvVaw0Tij0N0bocDPUM9nNVOhWX&ust=1743463766013000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKCuouj6sowDFQAAAAAdAAAAABAE" alt="Fondo" />
+      <Container className="formulario-sie mt-4">
+        <Card className="shadow-lg">
+          <Card.Header className="bg-primary text-white text-center">
+            <h4>Formulario de Estudiante</h4>
+          </Card.Header>
+          <Card.Body>
+            <Table striped bordered hover responsive className="custom-table">
+              <thead>
+                <tr>
+                  <th>Campo</th>
+                  <th>Valor 1</th>
+                  <th>Valor 2</th>
+                  <th>Valor 3</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row, index) => (
+                  <TableRow
+                    key={index}
+                    rowIndex={index}
+                    data={row}
+                    onCellChange={handleCellChange}
+                  />
+                ))}
+              </tbody>
+            </Table>
+            <div className="text-center mt-3">
+              <Button variant="success" onClick={handleSave}>
+                Guardar
+              </Button>
+            </div>
+          </Card.Body>
+        </Card>
+      </Container>
     </div>
   );
 }

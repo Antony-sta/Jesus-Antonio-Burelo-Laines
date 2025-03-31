@@ -1,0 +1,12 @@
+.fouter-container {
+  background-image: url('https://img.freepik.com/vector-gratis/fondo-tecnologia-digital-alambre-malla-red_1017-27428.jpg'); /* Cambia esta ruta por la de tu imagen */
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Ajusta el tamaño según tus necesidades */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white; /* Cambia el color del texto si es necesario */
+  font-size: 24px;
+}

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Método de Relajación - Versión Mejorada</title>
+    <style>
+        .system-container {margin: 20px; padding: 15px; border: 1px solid #ccc;}
+        table {border-collapse: collapse; margin-top: 10px;}
+        th, td {border: 1px solid #999; padding: 8px; text-align: center;}
+        .equation-input {margin: 5px; width: 50px;}
+        .new-system {background-color: #f0f0f0;}
+        .error {color: red;}
+    </style>
+</head>
+<body>
+    <!-- Sistemas predefinidos con orden manual -->
+    <div class="system-container">
+        <h3>Sistema 1 (λ = 0.95)</h3>
+        <div class="equations">
+            <div>6x₁ - x₂ - x₃ = 3</div>
+            <div>6x₁ +9x₂ +1x₃ = 40</div>
+            <div>-3x₁ +x₂ -12x₃ = 50</div>
+        </div>
+        <button onclick="solvePredefined(1)">Resolver Sistema 1</button>
+        <div id="result1"></div>
+    </div>
+
+    <div class="system-container">
+        <h3>Sistema 2 (λ = 1.2)</h3>
+        <div class="equations">
+            <div>-8x₁ +1x₂ -2x₃ = -20</div>
+            <div>2x₁ -6x₂ -x₃ = -38</div>
+            <div>-3x₁ -1x₂ +7x₃ = -34</div>
+        </div>
+        <button onclick="solvePredefined(2)">Resolver Sistema 2</button>
+        <div id="result2"></div>
+    </div>
+
+    <!-- Nuevo sistema dinámico 3x3 -->
+    <div class="system-container new-system">
+        <h3>Nuevo Sistema 3x3</h3>
+        <div id="new-systems"></div>
+        <button onclick="addNewEquation()">➕ Agregar Ecuación</button>
+        <div>
+            <label>λ (Factor de relajación): </label>
+            <input type="number" id="lambda" step="0.05" value="1.0" required>
+        </div>
+        <button onclick="solveNewSystem()">Resolver Nuevo Sistema</button>
+        <div id="new-result"></div>
+        <div id="error-msg" class="error"></div>
+    </div>
+
+<script>
+// Sistemas predefinidos con orden manual para diagonal dominante
+const predefinedSystems = {
+    1: {
+        lambda: 0.95,
+        equations: [
+            [6, -1, -1, 3],    // Ecuación 2 original reordenada
+            [6, 9, 1, 40],      // Ecuación 3 original
+            [-3, 1, -12, 50]    // Ecuación 1 original
+        ]
+    },
+    2: {
+        lambda: 1.2,
+        equations: [
+            [-8, 1, -2, -20],   // Ecuación 3 original reordenada
+            [2, -6, -1, -38],   // Ecuación 1 original
+            [-3, -1, 7, -34]     // Ecuación 2 original
+        ]
+    }
+};
+
+function solvePredefined(systemNum) {
+    const system = predefinedSystems[systemNum];
+    solve(system.equations, system.lambda, 5, `result${systemNum}`);
+}
+
+// Funcionalidad para nuevos sistemas 3x3
+let equations = [];
+function addNewEquation() {
+    if (equations.length >= 3) {
+        document.getElementById('error-msg').textContent = "¡Máximo 3 ecuaciones!";
+        return;
+    }
+    const container = document.getElementById('new-systems');
+    const div = document.createElement('div');
+    div.innerHTML = `
+        <input type="number" class="equation-input" placeholder="a${equations.length + 1}" required>
+        x₁ + <input type="number" class="equation-input" placeholder="b${equations.length + 1}" required>
+        x₂ + <input type="number" class="equation-input" placeholder="c${equations.length + 1}" required>
+        x₃ = <input type="number" class="equation-input" placeholder="d${equations.length + 1}" required>
+    `;
+    container.appendChild(div);
+    equations = [...container.children];
+    document.getElementById('error-msg').textContent = "";
+}
+
+function solveNewSystem() {
+    const inputs = document.querySelectorAll('.new-system .equation-input');
+    if (inputs.length !== 12) { // 3 ecuaciones × 4 campos cada una
+        document.getElementById('error-msg').textContent = "¡Ingrese 3 ecuaciones válidas!";
+        return;
+    }
+    
+    const system = [];
+    for(let i = 0; i < 3; i++) {
+        const vals = [
+            parseFloat(inputs[i*4].value),
+            parseFloat(inputs[i*4+1].value),
+            parseFloat(inputs[i*4+2].value),
+            parseFloat(inputs[i*4+3].value)
+        ];
+        if (vals.some(isNaN)) {
+            document.getElementById('error-msg').textContent = "¡Complete todos los campos!";
+            return;
+        }
+        system.push(vals);
+    }
+    
+    const lambda = parseFloat(document.getElementById('lambda').value);
+    solve(system, lambda, 5, 'new-result');
+}
+
+// Función principal de solución mejorada
+function solve(equations, lambda, tolerance, resultId) {
+    // Verificar diagonal dominante
+    if (!isDiagonallyDominant(equations)) {
+        document.getElementById(resultId).innerHTML = 
+            "<div class='error'>¡El sistema no es diagonal dominante!</div>";
+        return;
+    }
+    
+    let x = [0, 0, 0];
+    let iterations = [];
+    iterations.push({x1: 0, x2: 0, x3: 0, e1: '-', e2: '-', e3: '-'});
+    
+    let errors = [100, 100, 100];
+    let iterCount = 0;
+
+    while(Math.max(...errors) > tolerance && iterCount < 50) {
+        let newX = [...x];
+        
+        // Actualizar x1 usando la primera ecuación
+        newX[0] = (1 - lambda) * x[0] + 
+            (lambda / equations[0][0]) * (equations[0][3] 
+            - equations[0][1] * x[1] 
+            - equations[0][2] * x[2]);
+        
+        // Actualizar x2 usando la segunda ecuación y x1 actualizado
+        newX[1] = (1 - lambda) * x[1] + 
+            (lambda / equations[1][1]) * (equations[1][3] 
+            - equations[1][0] * newX[0] 
+            - equations[1][2] * x[2]);
+        
+        // Actualizar x3 usando la tercera ecuación y x1, x2 actualizados
+        newX[2] = (1 - lambda) * x[2] + 
+            (lambda / equations[2][2]) * (equations[2][3] 
+            - equations[2][0] * newX[0] 
+            - equations[2][1] * newX[1]);
+
+        // Calcular errores
+        errors = newX.map((val, i) => 
+            Math.abs((val - x[i]) / val * 100) || 0).map(n => Number(n.toFixed(2)));
+        
+        iterations.push({
+            x1: newX[0].toFixed(4),
+            x2: newX[1].toFixed(4),
+            x3: newX[2].toFixed(4),
+            e1: errors[0] < tolerance ? `<span style="color:green">${errors[0].toFixed(2)}%</span>` : `${errors[0].toFixed(2)}%`,
+            e2: errors[1] < tolerance ? `<span style="color:green">${errors[1].toFixed(2)}%</span>` : `${errors[1].toFixed(2)}%`,
+            e3: errors[2] < tolerance ? `<span style="color:green">${errors[2].toFixed(2)}%</span>` : `${errors[2].toFixed(2)}%`
+        });
+        
+        x = [...newX];
+        iterCount++;
+    }
+
+    // Generar tabla
+    let html = `<table>
+        <tr><th>Iteración</th><th>x₁</th><th>Error x₁</th><th>x₂</th><th>Error x₂</th><th>x₃</th><th>Error x₃</th></tr>`;
+    
+    iterations.forEach((row, i) => {
+        html += `<tr>
+            <td>${i}</td>
+            <td>${i === 0 ? 0 : row.x1}</td>
+            <td>${row.e1}</td>
+            <td>${i === 0 ? 0 : row.x2}</td>
+            <td>${row.e2}</td>
+            <td>${i === 0 ? 0 : row.x3}</td>
+            <td>${row.e3}</td>
+        </tr>`;
+    });
+    
+    html += `</table><p>Solución final:<br>
+        x₁ ≈ ${x[0].toFixed(2)},<br>
+        x₂ ≈ ${x[1].toFixed(2)},<br>
+        x₃ ≈ ${x[2].toFixed(2)}</p>`;
+
+    document.getElementById(resultId).innerHTML = html;
+}
+
+// Función para verificar diagonal dominante
+function isDiagonallyDominant(matrix) {
+    return matrix.every((row, i) => {
+        const diagonal = Math.abs(row[i]);
+        const sum = row.slice(0, 3).reduce((acc, val, j) => 
+            j !== i ? acc + Math.abs(val) : acc, 0);
+        return diagonal > sum;
+    });
+}
+</script>
+</body>
+</html>

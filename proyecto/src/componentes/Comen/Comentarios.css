@@ -1,0 +1,6 @@
+
+@import './Comentarios.css'; 
+/* Si necesitas personalizar algo, puedes sobrescribir aquí */
+.cali-title {
+  color: #0056b3; /* Cambia el color del título si es necesario */
+}
