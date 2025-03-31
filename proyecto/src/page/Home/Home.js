@@ -22,7 +22,7 @@ export function Home() {
 
       // Inicio de sesión exitoso
       setError('');
-      alert(`Bienvenido, ${response.data.user.user}`);
+      //alert(`Bienvenido, ${response.data.user.user}`);
       navigate("/inicio"); // Redirige a la página de inicio tras iniciar sesión
     } catch (error) {
       // Manejo de errores
