@@ -71,12 +71,23 @@ button {
 
 /* Fondo general con degradado azul */
 .formulario-sie {
-  background: linear-gradient(135deg, #007bff, #0056b3); /* Degradado azul */
-  color: white; /* Texto blanco para contraste */
-  padding: 20px;
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para estilo */
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Sombra para estilo */
+  width: 80%;
+  max-width: 900px;
+}
 
+.inicio-container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #6a11cb, #2575fc); /* Fondo degradado */
+  color: #fff; /* Texto blanco para contraste */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .inicio-container img {
