@@ -1,72 +1,52 @@
-import React, { useState } from 'react';
-import { Table, Button } from 'react-bootstrap'; // Importa React Bootstrap
-import 'bootstrap/dist/css/bootstrap.min.css'; // Importa los estilos de Bootstrap
+import React, { useState, useEffect } from 'react';
+import { Table } from 'react-bootstrap';
+import { Datos } from '../../API/'; // Importar la clase Datos
 import './Inicio.css';
 
-const TableRow = ({ data, rowIndex, onCellChange }) => (
-  <tr>
-    {data.map((cell, cellIndex) => (
-      <td key={cellIndex} className="td">
-        <input
-          type="text"
-          value={cell}
-          onChange={(e) => onCellChange(rowIndex, cellIndex, e.target.value)}
-        />
-      </td>
-    ))}
-  </tr>
-);
+const ctrDatos = new Datos(); // Crear una instancia de la clase Datos
 
-export function Inicio() {
-  const initialRows = [
-    ['Tutor:', 'Sexo', 'Barrio', 'Los pozos'],
-    ['Correo:', 'No Teléfono', 'Colonia', 'No de Casa'],
-    ['Edad:', 'Año de nacimiento', 'Mes el que sea', 'Dia 12'],
-  ];
+export function Inicio({ dato = [] }) {
+  const [listaDatos, setListaDatos] = useState([]);
 
-  const [rows, setRows] = useState(initialRows);
-
-  const handleCellChange = (rowIndex, cellIndex, newValue) => {
-    const updatedRows = rows.map((row, index) => {
-      if (index === rowIndex) {
-        return row.map((cell, idx) => (idx === cellIndex ? newValue : cell));
-      }
-      return row;
-    });
-    setRows(updatedRows);
+  const obtener = async () => {
+    try {
+      const listaPro = await ctrDatos.getDatos(); // Llamar al método getDatos de la clase Datos
+      setListaDatos(listaPro); // Guardar los datos en el estado
+    } catch (error) {
+      console.error("No se logra obtener:", error);
+    }
   };
 
-  const handleSave = () => {
-    // Aquí puedes implementar la lógica para guardar los datos actualizados
-    console.log('Datos guardados:', rows);
-    alert("Datos Guardados en la consola")
-  };
+  useEffect(() => {
+    obtener(); // Llamar a la función obtener al montar el componente
+  }, []);
 
   return (
-    
-    <div className="container">
-      <Table striped bordered hover> {/* Usa el componente Table de React Bootstrap */}
+    <>
+      <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Nombre</th> {/* Usa <th> en lugar de <th className="th"> */}
-            <th>No Control</th>
-            <th>Dirección</th>
-            <th>Calle</th>
+            <th>Nombre</th>
+            <th>No. Control</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Edad</th>
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, index) => (
-            <TableRow
-              key={index}
-              rowIndex={index}
-              data={row}
-              onCellChange={handleCellChange}
-            />
+          {listaDatos.map((dato, index) => (
+            <tr key={index}>
+              <td>{dato.nombre}</td>
+              <td>{dato.nocontrol}</td>
+              <td>{dato.correo}</td>
+              <td>{dato.telefono}</td>
+              <td>{dato.edad}</td>
+              
+            </tr>
           ))}
         </tbody>
       </Table>
-      <Button variant="primary" onClick={handleSave}>Guardar</Button> {/* Usa el componente Button de React Bootstrap */}
-    </div>
+    </>
   );
 }
 
