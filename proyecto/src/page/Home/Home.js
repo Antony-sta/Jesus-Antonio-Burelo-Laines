@@ -4,6 +4,7 @@ import axios from 'axios';
 import "./Home.css";
 import { Link } from 'react-router-dom';
 
+
 export function Home() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -28,6 +29,14 @@ export function Home() {
         user: username,
         password,
       });
+<<<<<<< HEAD
+=======
+
+      // Guarda el usuario en localStorage
+      localStorage.setItem("usuario", response.data.user.user);
+
+      // Inicio de sesión exitoso
+>>>>>>> steel
       setError('');
       navigate("/inicio");
     } catch (error) {
