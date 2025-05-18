@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
-import { Datos } from '../../API/'; // Importar la clase Datos
+import { Datos } from '../../API/';
 import './Inicio.css';
 
-const ctrDatos = new Datos(); // Crear una instancia de la clase Datos
+const ctrDatos = new Datos();
 
-export function Inicio({ dato = [] }) {
+export function Inicio() {
   const [listaDatos, setListaDatos] = useState([]);
+  const usuario = localStorage.getItem("usuario"); // Obtiene el usuario logueado
 
   const obtener = async () => {
     try {
-      const listaPro = await ctrDatos.getDatos(); // Llamar al método getDatos de la clase Datos
-      setListaDatos(listaPro); // Guardar los datos en el estado
+      const listaPro = await ctrDatos.getDatos();
+      // Filtra solo los datos del usuario logueado
+      const filtrados = listaPro.filter(dato => dato.user === usuario);
+      setListaDatos(filtrados);
     } catch (error) {
       console.error("No se logra obtener:", error);
     }
   };
 
   useEffect(() => {
-    obtener(); // Llamar a la función obtener al montar el componente
+    obtener();
   }, []);
 
   return (
@@ -41,7 +44,6 @@ export function Inicio({ dato = [] }) {
               <td>{dato.correo}</td>
               <td>{dato.telefono}</td>
               <td>{dato.edad}</td>
-              
             </tr>
           ))}
         </tbody>
