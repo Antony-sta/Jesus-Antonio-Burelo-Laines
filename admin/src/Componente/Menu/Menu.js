@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
             <Container>
                 <Navbar.Brand as={Link} to="/" >Barra de Herramientas</Navbar.Brand>
                 <Nav className="me-auto">
-                    <Link className="nav-link" to="/" >Usuarios</Link>
+                    <Link className="nav-link" to="/estudiantes" >Usuarios</Link>
                     <Link className="nav-link" to="/formularioEstudiante" >Formulario Alumno</Link>
                     <Link className="nav-link" to="/formsproductos" >Formulario Profesor</Link>
                 </Nav>

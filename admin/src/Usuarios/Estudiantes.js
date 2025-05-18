@@ -1,0 +1,126 @@
+import React, { useState, useEffect } from 'react';
+import { Table, Button, Modal } from 'react-bootstrap';
+import { Forms } from '../Api';
+import EditarDatos from '../Formulario/EditarDatos';
+
+const ctrDatos = new Forms();
+
+export function Estudiantes({ onEdit }) {
+    const [listaDatos, setListaDatos] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [selecProdc, setselecProdc] = useState(null)
+
+    const obtener = async () => {
+        try {
+            const listaPro = await ctrDatos.getDatos(); // Llamar al método getDatos de la clase Datos
+            setListaDatos(listaPro); // Guardar los datos en el estado
+        } catch (error) {
+            console.error("No se logra obtener:", error);
+        }
+    };
+
+    const onDelete = async (id) => {
+        try {
+            await ctrDatos.delDatos(id); // Realizar la solicitud DELETE al backend
+            setListaDatos(listaDatos.filter((dato) => dato._id !== id));
+        } catch (error) {
+            console.error("No se logra eliminar:", error);
+        }
+    };
+
+    const handleEdit = (dato) => {
+        setEditarDatos(dato); // Establecer el registro que se está editando
+        setShowModal(true); // Mostrar el modal
+    };
+
+    const handleClose = () => {
+        console.log("Cerrando el modal"); // Depuración
+        setShowModal(false); // Cerrar el modal
+        setEditarDatos(null); // Limpiar el estado de edición
+    };
+
+    const onSubmit = async (updatedData) => {
+        console.log("Datos enviados para actualizar:", updatedData); // Depuración
+        try {
+            await ctrDatos.patchDatos(editarDatos._id, updatedData); // Actualizar en el backend
+            setListaDatos((prev) =>
+                prev.map((dato) =>
+                    dato._id === editarDatos._id ? { ...dato, ...updatedData } : dato
+                )
+            );
+            handleClose(); // Cerrar el modal después de actualizar
+        } catch (error) {
+            console.error("Error al actualizar el registro:", error);
+        }
+    };
+
+    useEffect(() => {
+        obtener(); // Llamar a la función obtener al montar el componente
+    }, []);
+
+    return (
+        <>
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>No. Control</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th>Edad</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {listaDatos.map((dato, index) => (
+                        <tr key={index}>
+                            <td>{dato.nombre}</td>
+                            <td>{dato.nocontrol}</td>
+                            <td>{dato.correo}</td>
+                            <td>{dato.telefono}</td>
+                            <td>{dato.edad}</td>
+                            <td>
+                                <Button
+                                    variant="success"
+                                    onClick={() => handleEdit(dato)}
+                                >
+                                    Editar
+                                </Button>
+                            </td>
+                            <td>
+                                <Button
+                                    variant="danger"
+                                    size="sm"
+                                    onClick={() => onDelete(dato._id)}
+                                >
+                                    Eliminar
+                                </Button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+            <Modal show={showModal} onHide={handleClose} size="lg">
+                <Modal.Header closeButton>
+                    <Modal.Title>Editar Producto</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {selecProdc && (
+                        <EditarProducto
+                            producto={selecProdc}
+                            onSubmit={(updatedData) => {
+                                onEdit(updatedData); // Llama a la función de edición pasada desde el componente padre
+                                handleClose(); // Cierra el modal después de actualizar
+                            }}
+                            onCancel={handleClose} // Cierra el modal si se cancela
+                            isEditing={true} // Indica que está en modo edición
+                        />
+                    )}
+                </Modal.Body>
+            </Modal>
+        </>
+    );
+}
+
+export default Estudiantes;
