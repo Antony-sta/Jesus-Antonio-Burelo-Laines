@@ -18,6 +18,12 @@
   border-radius: 10px;
   overflow: hidden;
   background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para la tarjeta */
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-10px); /* Eleva la tarjeta al pasar el mouse */
 }
 
 /* Encabezado de la tarjeta */
@@ -25,6 +31,9 @@
   font-size: 1.5rem;
   font-weight: bold;
   text-transform: uppercase;
+  background: linear-gradient(135deg, #6a11cb, #2575fc); /* Degradado */
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Sombra para el texto */
 }
 
 /* Tabla personalizada */
@@ -62,11 +71,23 @@
   text-align: center;
 }
 
-/* Botón guardar */
+/* Botones con efectos */
 button {
   font-size: 1.2rem;
   padding: 10px 20px;
   border-radius: 5px;
+  border: none;
+  transition: all 0.3s ease-in-out; /* Transición para efectos */
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño al pasar el mouse */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
+}
+
+button:active {
+  transform: scale(0.95); /* Reduce ligeramente el tamaño al hacer clic */
 }
 
 /* Fondo general con degradado azul */
@@ -77,6 +98,11 @@ button {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Sombra para estilo */
   width: 80%;
   max-width: 900px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.formulario-sie:hover {
+  transform: translateY(-5px); /* Eleva el formulario al pasar el mouse */
 }
 
 .inicio-container {
@@ -90,6 +116,7 @@ button {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Estilo general para imágenes de fondo */
 .inicio-container img {
   position: absolute;
   top: 0;
@@ -125,4 +152,140 @@ button {
   justify-content: center;
   color: white; /* Cambia el color del texto si es necesario */
   font-size: 24px;
+}
+
+/* Estilo específico para la vista previa de la foto */
+.foto-preview {
+  width: 150px; /* Ajusta el ancho */
+  height: 150px; /* Ajusta el alto */
+  object-fit: cover; /* Asegura que la imagen no se deforme */
+  border-radius: 10px; /* Bordes redondeados */
+  margin-top: 10px;
+  border: 2px solid #007bff; /* Borde opcional */
+  transition: transform 0.3s ease-in-out;
+}
+
+.foto-preview:hover {
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño al pasar el mouse */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
+}
+
+/* Estilo para los inputs */
+.form-control {
+  border: 2px solid #007bff; /* Borde azul */
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out; /* Transición para efectos */
+}
+
+.form-control:focus {
+  border-color: #6a11cb; /* Cambia el color del borde al enfocar */
+  box-shadow: 0 0 8px rgba(106, 17, 203, 0.5); /* Sombra al enfocar */
+}
+
+/* Estilo para los select */
+.form-select {
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.form-select:focus {
+  border-color: #6a11cb;
+  box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+}
+
+.sie-info-flex {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Estilo y efectos avanzados para la imagen */
+.foto-halo-fuego {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160px;
+  min-height: 160px;
+  padding: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  box-shadow:
+    0 4px 24px 0 rgba(106, 17, 203, 0.25),
+    0 1.5px 8px 0 rgba(37, 117, 252, 0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  z-index: 1;
+}
+
+.foto-halo-fuego:hover {
+  transform: scale(1.07) rotate(-2deg);
+  box-shadow:
+    0 8px 32px 0 rgba(106, 17, 203, 0.35),
+    0 3px 16px 0 rgba(37, 117, 252, 0.25);
+  background: linear-gradient(120deg, #2575fc 0%, #6a11cb 100%);
+}
+
+.foto-sofia {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  background: #fff;
+  box-shadow: 0 6px 24px #2575fc22, 0 1.5px 8px #6a11cb33;
+  transition: box-shadow 0.3s, filter 0.3s;
+  filter: grayscale(0.05) brightness(1.04) contrast(1.08);
+}
+
+.foto-halo-fuego:hover .foto-sofia {
+  box-shadow: 0 12px 36px #2575fc44, 0 3px 16px #6a11cb55;
+  filter: grayscale(0) brightness(1.12) contrast(1.15);
+}
+
+.sie-info-datos {
+  flex: 1;
+  min-width: 240px;
+  color: #222;
+  background: rgba(255,255,255,0.92);
+  border-radius: 12px;
+  padding: 18px 28px;
+  box-shadow: 0 2px 12px #6a11cb11;
+  font-size: 1.08em;
+  font-weight: 400;
+  transition: box-shadow 0.3s;
+}
+
+.sie-info-datos strong {
+  color: #2575fc;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 2px #6a11cb11;
+}
+
+.sie-info-datos div {
+  margin-bottom: 12px;
+}
+
+@media (max-width: 700px) {
+  .sie-info-flex {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+  .sie-info-datos {
+    padding: 14px 8px;
+    font-size: 1em;
+  }
+  .foto-halo-fuego {
+    min-width: 120px;
+    min-height: 120px;
+    padding: 4px;
+  }
+  .foto-sofia {
+    width: 100px;
+    height: 100px;
+  }
 }

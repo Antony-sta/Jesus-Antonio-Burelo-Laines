@@ -8,29 +8,32 @@ export function Home() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [showLogin, setShowLogin] = useState(false); // Nuevo estado para mostrar login
   const navigate = useNavigate();
+
+  const handleProfileClick = (role) => {
+    if (role === "estudiante") {
+      setShowLogin(true);
+    } else if (role === "maestro") {
+      navigate("/Maestro");
+    } else if (role === "directivo") {
+      navigate("/login-directivo");
+    }
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
-      // Realizar la solicitud al backend usando axios
       const response = await axios.post("http://localhost:5000/login", {
         user: username,
         password,
       });
-
-      // Inicio de sesión exitoso
       setError('');
-      //alert(`Bienvenido, ${response.data.user.user}`);
-      navigate("/inicio"); // Redirige a la página de inicio tras iniciar sesión
+      navigate("/inicio");
     } catch (error) {
-      // Manejo de errores
       if (error.response) {
-        // Error del servidor (código de estado fuera del rango 2xx)
         setError(error.response.data.msg || "Error al iniciar sesión");
       } else {
-        // Error de red u otro problema
         console.error("Error al conectar con el servidor:", error);
         setError("Error al conectar con el servidor");
       }
@@ -48,36 +51,61 @@ export function Home() {
         </div>
         <h2>Acceso al SIE</h2>
         <h2>(Califi Tech)</h2>
-        {error && <div className="alert alert-danger">{error}</div>}
-        <form onSubmit={handleLogin}>
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Usuario"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
+
+        {/* Ventana de perfil */}
+        {!showLogin && (
+          <div className="profile-window">
+            <p>Selecciona tu perfil:</p>
+            <button className="btn btn-primary" onClick={() => handleProfileClick("estudiante")}>
+              Estudiante
+            </button>
+            <button className="btn btn-primary" onClick={() => handleProfileClick("maestro")}>
+              Maestros
+            </button>
+            <button className="btn btn-primary" onClick={() => handleProfileClick("directivo")}>
+              Directivo
+            </button>
           </div>
-          <div className="form-group">
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Contraseña"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          
-          <button type="submit" className="btn btn-primary">
-            Iniciar Sesión
-          </button>
-        </form>
-        <div className="forgot-password">
-          <Link to="/recuperar">¿Olvidaste tu contraseña?</Link>
-        </div>
+        )}
+
+        {/* Formulario de login solo para Estudiante */}
+        {showLogin && (
+          <>
+            {error && <div className="alert alert-danger">{error}</div>}
+            <form onSubmit={handleLogin}>
+              <div className="form-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Usuario"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="Contraseña"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              
+              <button type="submit" className="btn btn-primary">
+                Iniciar Sesión
+              </button>
+            </form>
+            <div className="forgot-password">
+              <Link to="/recuperar">¿Olvidaste tu contraseña?</Link>
+            </div>
+            <button className="btn btn-secondary" style={{marginTop: "10px"}} onClick={() => setShowLogin(false)}>
+              Volver
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

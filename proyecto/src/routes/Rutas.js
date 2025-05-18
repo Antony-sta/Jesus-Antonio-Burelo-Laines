@@ -7,6 +7,7 @@ import { Layout } from "../layouts";
 import { Route, Routes } from "react-router-dom";
 import React from 'react';
 import Formulario from "../componentes/Admin/Inicio/Ormulario/ormulario";
+import { Maestro } from "../componentes/Admin/Inicio/Maestro/Maestro";
 
 export function Rutas() {
   const Layouts = (Layout, Page) => {
@@ -25,6 +26,7 @@ export function Rutas() {
       <Route path="/recuperar" element={Layouts(Recuperar)} />
       <Route path="/Comen" element={Layouts(Layout, Comen)} />
       <Route path="/ormu" element={Layouts(Layout, Formulario)} />
+       <Route path="/Maestro" element={Layouts(Layout, Maestro)} />
       <Route path="/comentarios" element={<Comen />} />
     </Routes>
   );

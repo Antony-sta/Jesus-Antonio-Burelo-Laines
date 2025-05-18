@@ -150,3 +150,19 @@
     text-align: center;
   }
   
+  .profile-window {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 8px;
+    background: #f5f5f5;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .profile-window p {
+    margin-bottom: 15px;
+    color: #004AAD;
+    font-weight: bold;
+  }
+  .profile-window .btn {
+    margin: 5px 0;
+    width: 100%;
+  }
