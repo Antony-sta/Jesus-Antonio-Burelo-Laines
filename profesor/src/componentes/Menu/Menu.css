@@ -1,0 +1,25 @@
+.header {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.title {
+  margin: 0;
+  color: #333;
+}
+
+.subHeader {
+  margin-top: 10px;
+}
+
+.link {
+  margin-right: 15px;
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Modal } from 'react-bootstrap';
 import { Forms } from '../Api';
+import EditarDatos from '../Formulario/EditarDatos';
+
 const ctrDatos = new Forms();
 
-export function Estudiantes() {
+export function Estudiantes({ onEdit }) {
     const [listaDatos, setListaDatos] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [selecProdc, setselecProdc] = useState(null)
 
     const obtener = async () => {
         try {
@@ -17,11 +21,36 @@ export function Estudiantes() {
 
     const onDelete = async (id) => {
         try {
-            // Realizar la solicitud DELETE al backend
-            await ctrDatos.delDatos(id);
+            await ctrDatos.delDatos(id); // Realizar la solicitud DELETE al backend
             setListaDatos(listaDatos.filter((dato) => dato._id !== id));
         } catch (error) {
             console.error("No se logra eliminar:", error);
+        }
+    };
+
+    const handleEdit = (dato) => {
+        setEditarDatos(dato); // Establecer el registro que se está editando
+        setShowModal(true); // Mostrar el modal
+    };
+
+    const handleClose = () => {
+        console.log("Cerrando el modal"); // Depuración
+        setShowModal(false); // Cerrar el modal
+        setEditarDatos(null); // Limpiar el estado de edición
+    };
+
+    const onSubmit = async (updatedData) => {
+        console.log("Datos enviados para actualizar:", updatedData); // Depuración
+        try {
+            await ctrDatos.patchDatos(editarDatos._id, updatedData); // Actualizar en el backend
+            setListaDatos((prev) =>
+                prev.map((dato) =>
+                    dato._id === editarDatos._id ? { ...dato, ...updatedData } : dato
+                )
+            );
+            handleClose(); // Cerrar el modal después de actualizar
+        } catch (error) {
+            console.error("Error al actualizar el registro:", error);
         }
     };
 
@@ -52,7 +81,10 @@ export function Estudiantes() {
                             <td>{dato.telefono}</td>
                             <td>{dato.edad}</td>
                             <td>
-                                <Button variant="success" size="sm">
+                                <Button
+                                    variant="success"
+                                    onClick={() => handleEdit(dato)}
+                                >
                                     Editar
                                 </Button>
                             </td>
@@ -69,6 +101,24 @@ export function Estudiantes() {
                     ))}
                 </tbody>
             </Table>
+            <Modal show={showModal} onHide={handleClose} size="lg">
+                <Modal.Header closeButton>
+                    <Modal.Title>Editar Producto</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {selecProdc && (
+                        <EditarProducto
+                            producto={selecProdc}
+                            onSubmit={(updatedData) => {
+                                onEdit(updatedData); // Llama a la función de edición pasada desde el componente padre
+                                handleClose(); // Cierra el modal después de actualizar
+                            }}
+                            onCancel={handleClose} // Cierra el modal si se cancela
+                            isEditing={true} // Indica que está en modo edición
+                        />
+                    )}
+                </Modal.Body>
+            </Modal>
         </>
     );
 }
