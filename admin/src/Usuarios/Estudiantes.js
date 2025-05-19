@@ -65,9 +65,16 @@ export function Estudiantes() {
                     <tr>
                         <th>Nombre</th>
                         <th>No. Control</th>
+                        <th>Calle</th>
                         <th>Correo</th>
+                        <th>Sexo</th>
+                        <th>Barrio</th>
                         <th>Teléfono</th>
                         <th>Edad</th>
+                        <th>Año</th>
+                        <th>Mes</th>
+                        <th>Día</th>
+                        <th>Imagen</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
@@ -75,11 +82,22 @@ export function Estudiantes() {
                 <tbody>
                     {listaDatos.map((dato, index) => (
                         <tr key={index}>
-                            <td>{dato.nombre}</td>
-                            <td>{dato.nocontrol}</td>
-                            <td>{dato.correo}</td>
-                            <td>{dato.telefono}</td>
-                            <td>{dato.edad}</td>
+                            <td>{dato.nombre || "N/A"}</td>
+                            <td>{dato.nocontrol || "N/A"}</td>
+                            <td>{dato.calle || "N/A"}</td>
+                            <td>{dato.correo || "N/A"}</td>
+                            <td>{dato.sexo || "N/A"}</td>
+                            <td>{dato.barrio || "N/A"}</td>
+                            <td>{dato.telefono || "N/A"}</td>
+                            <td>{dato.edad || "N/A"}</td>
+                            <td>{dato.año !== undefined && dato.año !== null ? dato.año : "N/A"}</td>
+                            <td>{dato.mes || "N/A"}</td>
+                            <td>{dato.dia !== undefined && dato.dia !== null ? dato.dia : "N/A"}</td>
+                            <td>
+                                {dato.imagep
+                                    ? <img src={dato.imagep} alt="Imagen" style={{ width: 40, height: 40, borderRadius: "50%" }} />
+                                    : "N/A"}
+                            </td>
                             <td>
                                 <Button
                                     variant="success"

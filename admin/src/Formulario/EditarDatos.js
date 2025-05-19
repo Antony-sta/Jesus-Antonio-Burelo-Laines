@@ -26,7 +26,7 @@ export function EditarDatos({ producto, onSubmit, onCancel, isEditing }) {
     <Form noValidate onSubmit={formik.handleSubmit}>
       <Row className="mb-3">
         <Form.Group as={Col} md="6">
-          <Form.Label>Nombre del producto</Form.Label>
+          <Form.Label>Nombre</Form.Label>
           <Form.Control
             required
             type="text"
@@ -39,14 +39,11 @@ export function EditarDatos({ producto, onSubmit, onCancel, isEditing }) {
             {formik.errors.nombre}
           </Form.Control.Feedback>
         </Form.Group>
-      </Row>
-      <Row className="mb-3">
-        <Form.Group as={Col} md="3" controlId="validationCustom02">
+        <Form.Group as={Col} md="6">
           <Form.Label>No. Control</Form.Label>
           <Form.Control
             required
             type="text"
-            placeholder="No. Control"
             name="nocontrol"
             value={formik.values.nocontrol}
             onChange={formik.handleChange}
@@ -56,29 +53,81 @@ export function EditarDatos({ producto, onSubmit, onCancel, isEditing }) {
             {formik.errors.nocontrol}
           </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group as={Col} md="3" controlId="validationCustom03">
-          <Form.Label>Teléfono</Form.Label>
-          <InputGroup hasValidation>
-            <Form.Control
-              required
-              type="number"
-              placeholder="Teléfono"
-              name="telefono"
-              value={formik.values.telefono}
-              onChange={formik.handleChange}
-              isInvalid={formik.touched.telefono && !!formik.errors.telefono}
-            />
-            <Form.Control.Feedback type="invalid">
-              {formik.errors.telefono}
-            </Form.Control.Feedback>
-          </InputGroup>
+      </Row>
+      <Row className="mb-3">
+        <Form.Group as={Col} md="6">
+          <Form.Label>Calle</Form.Label>
+          <Form.Control
+            type="text"
+            name="calle"
+            value={formik.values.calle}
+            onChange={formik.handleChange}
+            isInvalid={formik.touched.calle && !!formik.errors.calle}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.calle}
+          </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group as={Col} md="3" controlId="validationCustom04">
+        <Form.Group as={Col} md="6">
+          <Form.Label>Correo</Form.Label>
+          <Form.Control
+            type="email"
+            name="correo"
+            value={formik.values.correo}
+            onChange={formik.handleChange}
+            isInvalid={formik.touched.correo && !!formik.errors.correo}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.correo}
+          </Form.Control.Feedback>
+        </Form.Group>
+      </Row>
+      <Row className="mb-3">
+        <Form.Group as={Col} md="4">
+          <Form.Label>Sexo</Form.Label>
+          <Form.Control
+            type="text"
+            name="sexo"
+            value={formik.values.sexo}
+            onChange={formik.handleChange}
+            isInvalid={formik.touched.sexo && !!formik.errors.sexo}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.sexo}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md="4">
+          <Form.Label>Barrio</Form.Label>
+          <Form.Control
+            type="text"
+            name="barrio"
+            value={formik.values.barrio}
+            onChange={formik.handleChange}
+            isInvalid={formik.touched.barrio && !!formik.errors.barrio}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.barrio}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md="4">
+          <Form.Label>Teléfono</Form.Label>
+          <Form.Control
+            type="number"
+            name="telefono"
+            value={formik.values.telefono}
+            onChange={formik.handleChange}
+            isInvalid={formik.touched.telefono && !!formik.errors.telefono}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.telefono}
+          </Form.Control.Feedback>
+        </Form.Group>
+      </Row>
+      <Row className="mb-3">
+        <Form.Group as={Col} md="4">
           <Form.Label>Edad</Form.Label>
           <Form.Control
-            required
             type="number"
-            placeholder="Edad"
             name="edad"
             value={formik.values.edad}
             onChange={formik.handleChange}
@@ -89,6 +138,47 @@ export function EditarDatos({ producto, onSubmit, onCancel, isEditing }) {
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md="4">
+          <Form.Label>Año</Form.Label>
+          <Form.Control
+            type="number"
+            name="año"
+            value={formik.values.año || ""}
+            onChange={formik.handleChange}
+            isInvalid={formik.touched.año && !!formik.errors.año}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.año}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md="2">
+          <Form.Label>Mes</Form.Label>
+          <Form.Control
+            type="text"
+            name="mes"
+            value={formik.values.mes}
+            onChange={formik.handleChange}
+            isInvalid={formik.touched.mes && !!formik.errors.mes}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.mes}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md="2">
+          <Form.Label>Día</Form.Label>
+          <Form.Control
+            type="number"
+            name="dia"
+            value={formik.values.dia || ""}
+            onChange={formik.handleChange}
+            isInvalid={formik.touched.dia && !!formik.errors.dia}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.dia}
+          </Form.Control.Feedback>
+        </Form.Group>
+      </Row>
+      <Row className="mb-3">
+        <Form.Group as={Col} md="6">
           <Form.Label>Imagen</Form.Label>
           <Form.Control
             type="file"
