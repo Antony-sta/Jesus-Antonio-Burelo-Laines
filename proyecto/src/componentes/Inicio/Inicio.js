@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 import { Datos } from '../../API/';
+import { Home } from '../../page';
 import './Inicio.css';
 
 const ctrDatos = new Datos();
 
 export function Inicio() {
   const [listaDatos, setListaDatos] = useState([]);
-  const usuario = localStorage.getItem("usuario"); // Obtiene el usuario logueado
+  const usuarioId = localStorage.getItem("usuarioId"); // Debe ser el _id del usuario
 
   const obtener = async () => {
     try {
       const listaPro = await ctrDatos.getDatos();
-      // Filtra solo los datos del usuario logueado
-      const filtrados = listaPro.filter(dato => dato.user === usuario);
+      console.log("Datos recibidos:", listaPro);
+      console.log("ID usuario logueado:", usuarioId);
+      const filtrados = listaPro.filter(dato => String(dato._id) === String(usuarioId));
+      console.log("Filtrados:", filtrados);
       setListaDatos(filtrados);
     } catch (error) {
       console.error("No se logra obtener:", error);
@@ -37,15 +40,23 @@ export function Inicio() {
           </tr>
         </thead>
         <tbody>
-          {listaDatos.map((dato, index) => (
-            <tr key={index}>
-              <td>{dato.nombre}</td>
-              <td>{dato.nocontrol}</td>
-              <td>{dato.correo}</td>
-              <td>{dato.telefono}</td>
-              <td>{dato.edad}</td>
+          {listaDatos.length === 0 ? (
+            <tr>
+              <td colSpan="5" style={{ textAlign: "center" }}>
+                No se encontraron datos para este usuario.
+              </td>
             </tr>
-          ))}
+          ) : (
+            listaDatos.map((dato, index) => (
+              <tr key={index}>
+                <td>{dato.nombre}</td>
+                <td>{dato.nocontrol}</td>
+                <td>{dato.correo}</td>
+                <td>{dato.telefono}</td>
+                <td>{dato.edad}</td>
+              </tr>
+            ))
+          )}
         </tbody>
       </Table>
     </>

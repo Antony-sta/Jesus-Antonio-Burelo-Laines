@@ -29,14 +29,13 @@ export function Home() {
         user: username,
         password,
       });
-<<<<<<< HEAD
-=======
+        console.log("Respuesta completa:", response.data);
+        console.log("Usuario recibido:", response.data.user);
 
       // Guarda el usuario en localStorage
-      localStorage.setItem("usuario", response.data.user.user);
-
+      localStorage.setItem("usuarioId", response.data.user.id);
+      console.log("ID guardado:", response.data.user.id);
       // Inicio de sesión exitoso
->>>>>>> steel
       setError('');
       navigate("/inicio");
     } catch (error) {
@@ -60,61 +59,36 @@ export function Home() {
         </div>
         <h2>Acceso al SIE</h2>
         <h2>(Califi Tech)</h2>
-
-        {/* Ventana de perfil */}
-        {!showLogin && (
-          <div className="profile-window">
-            <p>Selecciona tu perfil:</p>
-            <button className="btn btn-primary" onClick={() => handleProfileClick("estudiante")}>
-              Estudiante
-            </button>
-            <button className="btn btn-primary" onClick={() => handleProfileClick("maestro")}>
-              Maestros
-            </button>
-            <button className="btn btn-primary" onClick={() => handleProfileClick("directivo")}>
-              Directivo
-            </button>
+        {error && <div className="alert alert-danger">{error}</div>}
+        <form onSubmit={handleLogin}>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Usuario"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
           </div>
-        )}
+          <div className="form-group">
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-        {/* Formulario de login solo para Estudiante */}
-        {showLogin && (
-          <>
-            {error && <div className="alert alert-danger">{error}</div>}
-            <form onSubmit={handleLogin}>
-              <div className="form-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Usuario"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  type="password"
-                  className="form-control"
-                  placeholder="Contraseña"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-              
-              <button type="submit" className="btn btn-primary">
-                Iniciar Sesión
-              </button>
-            </form>
-            <div className="forgot-password">
-              <Link to="/recuperar">¿Olvidaste tu contraseña?</Link>
-            </div>
-            <button className="btn btn-secondary" style={{marginTop: "10px"}} onClick={() => setShowLogin(false)}>
-              Volver
-            </button>
-          </>
-        )}
+          <button type="submit" className="btn btn-primary">
+            Iniciar Sesión
+          </button>
+        </form>
+        <div className="forgot-password">
+          <Link to="/recuperar">¿Olvidaste tu contraseña?</Link>
+        </div>
       </div>
     </div>
   );
