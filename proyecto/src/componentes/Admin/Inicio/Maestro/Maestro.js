@@ -3,16 +3,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import "../../../../page/Home/Home.css";
 
-<<<<<<<< HEAD:proyecto/src/componentes/Admin/Inicio/Maestro/Maestro.js
-export function Maestro() {
-  const [username, setUsername] = useState('maestro1'); // Usuario fijo
-  const [password, setPassword] = useState('12345');    // Contraseña fija
-========
 
-export function Home() {
+export function Maestro() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
->>>>>>>> steel:profe/src/page/Home/Home.js
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -24,14 +18,13 @@ export function Home() {
         user: username,
         password,
       });
-<<<<<<<< HEAD:proyecto/src/componentes/Admin/Inicio/Maestro/Maestro.js
-========
+
 
       // Guarda el usuario en localStorage
       localStorage.setItem("usuario", response.data.user.user);
 
       // Inicio de sesión exitoso
->>>>>>>> steel:profe/src/page/Home/Home.js
+
       setError('');
       navigate("/inicio-maestro");
     } catch (error) {
