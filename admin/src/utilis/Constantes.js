@@ -6,6 +6,7 @@ export const ENV ={
         CREATEPRODUCTO:"/crear",
         GETDATOS:"/lista",
         DELETEDATOS:"/eliminar",
-        PATCHEDITAR:"/verlos"
+        PATCHEDITAR:"/verlos",
+        GETCALI:"/calificaciones",
     }
 }

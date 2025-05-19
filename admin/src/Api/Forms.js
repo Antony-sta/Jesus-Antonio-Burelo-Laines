@@ -64,4 +64,17 @@ export class Forms {
             console.error(`Error al actualizar el producto con ID ${id}:`, error.message);
         }
     }
+
+    async createCalificaciones(data) {
+        try {
+            const response = await Axios.post(
+                `${this.baseApi}${ENV.API_ROUTE.GETCALI}`,
+                data // Envía como JSON
+            );
+            return response.data;
+        } catch (error) {
+            console.error("Error al crear calificaciones:", error.message);
+        }
+    }
+
 }

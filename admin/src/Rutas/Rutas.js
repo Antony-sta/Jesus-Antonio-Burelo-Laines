@@ -5,6 +5,7 @@ import { Layaut } from '../Layaut'
 import { Formulario } from "../Formulario"
 import { Estudiantes } from '../Usuarios'
 import Archivos from '../Formulario/Archivos'
+import { Calificaciones } from '../Componente/Calificaciones'
 
 export function Rutas() {
     const Layauts = (Layaut, Page) => (
@@ -18,6 +19,7 @@ export function Rutas() {
             <Route path='/formularioEstudiante' element={Layauts(Layaut, Formulario)} />
             <Route path='/estudiantes' element={Layauts(Layaut, Estudiantes)} />
             <Route path="/formsproductos" element={<Archivos />} />
+            <Route path="/calificaciones" element={Layauts(Layaut,Calificaciones)}/>
         </Routes>
     )
 }

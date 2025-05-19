@@ -45,7 +45,7 @@ export function Inicio() {
         <div className="sie-info-flex">
           <div className="foto-halo-fuego">
             <img
-              src={usuario.imagep || usuario.foto || "https://randomuser.me/api/portraits/lego/1.jpg"}
+              src= "https://randomuser.me/api/portraits/lego/1.jpg"
               alt="Foto del alumno"
               className="foto-sofia"
             />

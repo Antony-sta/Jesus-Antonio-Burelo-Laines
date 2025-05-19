@@ -13,7 +13,7 @@ export function Home() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+ 
     try {
       // Realizar la solicitud al backend usando axios
       const response = await axios.post("http://localhost:5000/login", {
@@ -25,6 +25,7 @@ export function Home() {
 
       // Guarda el usuario en localStorage
       localStorage.setItem("usuarioId", response.data.user.id);
+      localStorage.setItem("usuarioCompleto", JSON.stringify(response.data.user)); // <-- AGREGA ESTA LÍNEA
       console.log("ID guardado:", response.data.user.id);
       // Inicio de sesión exitoso
       setError('');
