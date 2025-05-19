@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Modal } from 'react-bootstrap';
 import { Forms } from '../Api';
-import EditarDatos from '../Formulario/EditarDatos';
+import { EditarDatos } from '../Formulario';
 
 const ctrDatos = new Forms();
 
-export function Estudiantes({ onEdit }) {
+export function Estudiantes() {
     const [listaDatos, setListaDatos] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selecProdc, setselecProdc] = useState(null)
@@ -29,26 +29,26 @@ export function Estudiantes({ onEdit }) {
     };
 
     const handleEdit = (dato) => {
-        setEditarDatos(dato); // Establecer el registro que se está editando
+        setselecProdc(dato); // Establecer el registro que se está editando
         setShowModal(true); // Mostrar el modal
     };
 
     const handleClose = () => {
         console.log("Cerrando el modal"); // Depuración
         setShowModal(false); // Cerrar el modal
-        setEditarDatos(null); // Limpiar el estado de edición
+        setselecProdc(null); // Limpiar el estado de edición
     };
 
-    const onSubmit = async (updatedData) => {
-        console.log("Datos enviados para actualizar:", updatedData); // Depuración
+    const onEdit = async (updatedData) => {
+        if (!selecProdc) return;
         try {
-            await ctrDatos.patchDatos(editarDatos._id, updatedData); // Actualizar en el backend
+            await ctrDatos.patchDatos(selecProdc._id, updatedData);
             setListaDatos((prev) =>
                 prev.map((dato) =>
-                    dato._id === editarDatos._id ? { ...dato, ...updatedData } : dato
+                    dato._id === selecProdc._id ? { ...dato, ...updatedData } : dato
                 )
             );
-            handleClose(); // Cerrar el modal después de actualizar
+            handleClose();
         } catch (error) {
             console.error("Error al actualizar el registro:", error);
         }
@@ -107,14 +107,11 @@ export function Estudiantes({ onEdit }) {
                 </Modal.Header>
                 <Modal.Body>
                     {selecProdc && (
-                        <EditarProducto
+                        <EditarDatos
                             producto={selecProdc}
-                            onSubmit={(updatedData) => {
-                                onEdit(updatedData); // Llama a la función de edición pasada desde el componente padre
-                                handleClose(); // Cierra el modal después de actualizar
-                            }}
-                            onCancel={handleClose} // Cierra el modal si se cancela
-                            isEditing={true} // Indica que está en modo edición
+                            onSubmit={onEdit}
+                            onCancel={handleClose}
+                            isEditing={true}
                         />
                     )}
                 </Modal.Body>
