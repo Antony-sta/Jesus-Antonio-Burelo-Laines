@@ -26,7 +26,7 @@ export function Rutas() {
       <Route path="/recuperar" element={Layouts(Recuperar)} />
       <Route path="/Comen" element={Layouts(Layout, Comen)} />
       <Route path="/ormu" element={Layouts(Layout, Formulario)} />
-       <Route path="/Maestro" element={Layouts(Layout, Maestro)} />
+      <Route path="/maestro-login" element={<Maestro />} />
       <Route path="/comentarios" element={<Comen />} />
     </Routes>
   );

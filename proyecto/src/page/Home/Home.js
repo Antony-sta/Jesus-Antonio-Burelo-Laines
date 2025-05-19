@@ -15,7 +15,7 @@ export function Home() {
     if (role === "estudiante") {
       setShowLogin(true);
     } else if (role === "maestro") {
-      navigate("/Maestro");
+      navigate("/maestro-login");
     } else if (role === "directivo") {
       navigate("/login-directivo");
     }
@@ -59,9 +59,7 @@ export function Home() {
             <button className="btn btn-primary" onClick={() => handleProfileClick("estudiante")}>
               Estudiante
             </button>
-            <button className="btn btn-primary" onClick={() => handleProfileClick("maestro")}>
-              Maestros
-            </button>
+            <Link to="/maestro-login" className="btn btn-primary">Maestros</Link>
             <button className="btn btn-primary" onClick={() => handleProfileClick("directivo")}>
               Directivo
             </button>
