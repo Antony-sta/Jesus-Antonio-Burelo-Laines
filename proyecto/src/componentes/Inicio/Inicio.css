@@ -112,7 +112,7 @@ button:active {
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #6a11cb, #2575fc); /* Fondo degradado */
-  color: #fff; /* Texto blanco para contraste */
+  color: #fff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -267,6 +267,29 @@ button:active {
 
 .sie-info-datos div {
   margin-bottom: 12px;
+}
+
+/* Ventana flotante centrada */
+.ventana-inicio {
+  background: rgba(255,255,255,0.95);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(106,17,203,0.18), 0 2px 8px rgba(37,117,252,0.12);
+  padding: 40px 32px;
+  min-width: 320px;
+  max-width: 90vw;
+  text-align: center;
+  color: #222;
+  z-index: 2;
+  position: relative;
+  font-size: 1.2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ventana-inicio h2 {
+  color: #6a11cb;
+  margin-bottom: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
 @media (max-width: 700px) {

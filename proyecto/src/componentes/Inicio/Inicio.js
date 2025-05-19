@@ -22,31 +22,13 @@ export function Inicio({ dato = [] }) {
   }, []);
 
   return (
-    <>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>No. Control</th>
-            <th>Correo</th>
-            <th>Teléfono</th>
-            <th>Edad</th>
-          </tr>
-        </thead>
-        <tbody>
-          {listaDatos.map((dato, index) => (
-            <tr key={index}>
-              <td>{dato.nombre}</td>
-              <td>{dato.nocontrol}</td>
-              <td>{dato.correo}</td>
-              <td>{dato.telefono}</td>
-              <td>{dato.edad}</td>
-              
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </>
+    <div className="inicio-container">
+      <div className="ventana-inicio">
+        <h2>Bienvenido</h2>
+        <p>Esta es tu ventana de inicio personalizada.</p>
+        {/* Puedes agregar más contenido aquí */}
+      </div>
+    </div>
   );
 }
 

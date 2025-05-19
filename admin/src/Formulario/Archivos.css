@@ -1,0 +1,189 @@
+.archivos-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #434eea 0%, #3a7bfd 100%);
+  color: white;
+  padding: 2rem;
+  position: relative;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  animation: fadeInBg 1s;
+}
+
+@keyframes fadeInBg {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-doc {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 420px;
+  max-width: 95vw;
+  transform: translate(-50%, -50%);
+  background: rgba(255,255,255,0.97);
+  color: #222;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px 0 rgba(67,78,234,0.25), 0 1.5px 8px 0 rgba(58,123,253,0.12);
+  padding: 2.5rem 2rem 1.5rem 2rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: modalPop 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+@keyframes modalPop {
+  0% { transform: translate(-50%, -60%) scale(0.8); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.modal-doc h3 {
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  letter-spacing: 1px;
+  color: #2b2b52;
+  text-shadow: 0 2px 8px #3a7bfd33;
+}
+
+.input-file {
+  margin: 1rem 0 0.5rem 0;
+  padding: 0.4rem 0.7rem;
+  border-radius: 7px;
+  border: 1.5px solid #3a7bfd;
+  background: #f3f6fd;
+  color: #222;
+  font-size: 1rem;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 4px #3a7bfd22;
+}
+
+.input-file:focus {
+  outline: none;
+  border: 2px solid #434eea;
+  box-shadow: 0 2px 8px #434eea33;
+}
+
+.file-info {
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+  color: #434eea;
+  background: #eaf0ff;
+  border-radius: 6px;
+  padding: 0.3rem 0.7rem;
+  box-shadow: 0 1px 4px #3a7bfd22;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: fadeInFile 0.5s;
+}
+
+@keyframes fadeInFile {
+  from { opacity: 0; transform: translateY(-10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-group button {
+  padding: 0.7rem 1.5rem;
+  border: none;
+  background: linear-gradient(90deg, #434eea 60%, #3a7bfd 100%);
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.08rem;
+  font-weight: 500;
+  box-shadow: 0 2px 12px #3a7bfd33;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  letter-spacing: 0.5px;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-group button:active {
+  transform: scale(0.96);
+}
+
+.btn-group button:hover, .btn-eliminar:hover {
+  background: linear-gradient(90deg, #3a7bfd 0%, #434eea 100%);
+  box-shadow: 0 4px 16px #434eea44;
+}
+
+.btn-eliminar {
+  background: linear-gradient(90deg, #e74c3c 60%, #c0392b 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-size: 0.98rem;
+  margin-left: 0.5rem;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px #e74c3c33;
+}
+
+.file-list {
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  max-height: 180px;
+  overflow-y: auto;
+  animation: fadeInFile 0.7s;
+}
+
+.file-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #f3f6fd 80%, #eaf0ff 100%);
+  color: #222;
+  border-radius: 7px;
+  padding: 0.6rem 0.9rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.01rem;
+  box-shadow: 0 1px 4px #3a7bfd22;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+
+.file-list-item:hover {
+  background: linear-gradient(90deg, #eaf0ff 60%, #f3f6fd 100%);
+  box-shadow: 0 2px 8px #3a7bfd33;
+}
+
+.ver-btn {
+  background: linear-gradient(90deg, #00c6fb 60%, #005bea 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-size: 0.98rem;
+  margin-left: 0.5rem;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px #00c6fb33;
+}
+
+.ver-btn:hover {
+  background: linear-gradient(90deg, #005bea 0%, #00c6fb 100%);
+  box-shadow: 0 4px 16px #005bea44;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  background: #eaf0ff;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #3a7bfd88;
+  border-radius: 6px;
+}
