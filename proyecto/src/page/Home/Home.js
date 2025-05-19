@@ -20,10 +20,12 @@ export function Home() {
         user: username,
         password,
       });
+        console.log("Respuesta completa:", response.data);
+        console.log("Usuario recibido:", response.data.user);
 
       // Guarda el usuario en localStorage
-      localStorage.setItem("usuario", response.data.user.user);
-
+      localStorage.setItem("usuarioId", response.data.user.id);
+      console.log("ID guardado:", response.data.user.id);
       // Inicio de sesión exitoso
       setError('');
       alert(`Bienvenido, ${response.data.user.user}`);
@@ -74,7 +76,7 @@ export function Home() {
               required
             />
           </div>
-          
+
           <button type="submit" className="btn btn-primary">
             Iniciar Sesión
           </button>
